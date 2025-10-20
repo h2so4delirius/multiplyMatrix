@@ -1,3 +1,4 @@
+```mermaid
 flowchart TD
     A[Začátek funkce writeInFile] --> B[Vytvoří objekt ofstream out]
     B --> C[Otevře soubor result.txt]
@@ -11,3 +12,4 @@ flowchart TD
     I --> F
     F --> J[Uzavře soubor]
     J --> K[Konec funkce]
+```

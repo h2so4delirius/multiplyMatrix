@@ -1,3 +1,4 @@
+```mermaid
 flowchart TD
     A[Začátek funkce ShowMatrix] --> B[Cyklus i = 0 .. height * weight - 1]
     B --> C[Vypíše prvek matrix i a mezeru]
@@ -9,3 +10,4 @@ flowchart TD
     G -- Ne --> B
     G -- Ano --> H[Vypíše prázdný řádek]
     H --> I[Vrátí se z funkce]
+```
