@@ -40,15 +40,29 @@ void writeInFile(double *matrix, unsigned int height, unsigned int weight){
     out.open("result.txt");
     if (out.is_open())
     {
+        out <<height<<" "<<weight<<std::endl;
         for (unsigned int i = 0; i < height; i++){
             for (unsigned int j = 0; j < weight; j++){
-                out << matrix[i * weight + j] <<" ";
+                out<<matrix[i * weight + j]<<" ";
             }
             out<<std::endl;
         }
     }
     out.close();    
     return;
+}
+
+double* readMatrix(const std::string& filename,unsigned int& height,unsigned int& weight) {
+    std::ifstream fin(filename);
+    if (!fin.is_open()) {
+        throw std::runtime_error("Cannot open file: "+filename);
+    }
+    fin >> height >> weight;
+    double*arr = new double[height * weight];
+    for (int i = 0; i < height * weight; i++) {
+        fin >> arr[i];
+    }
+    return arr;
 }
 
 
@@ -111,14 +125,7 @@ int main(){
         B = new double[12]{1, 2, 3, 4, 5, 6,
                         7, 8, 9, 10, 11, 12};
 
-        /*double expected_2[36] = {
-            15, 18, 21, 24, 27, 30,
-            33, 40, 47, 54, 61, 68,
-            51, 62, 73, 84, 95, 106,
-            69, 84, 99, 114, 129, 144,
-            87, 106, 125, 144, 163, 182,
-            105, 128, 151, 174, 197, 220
-        };*/
+
         double expected_2[36] = {15,18,	21,	24, 27,	30,
                                 31,	38,	45,	52,	59,	66,
                                 47,	58,	69,	80,	91,	102,
@@ -154,7 +161,10 @@ int main(){
         delete[] A;
         delete[] B;
         delete[] C;
-
+        unsigned int height,weight;
+        A = readMatrix("result.txt",height,weight);
+        ShowMatrix(A,height,weight);
+        delete[] A;
 
         std::cout << "All matrixMultiply tests passed!\n";
         return 0;
